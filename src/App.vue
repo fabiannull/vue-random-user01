@@ -1,42 +1,48 @@
 <template>
   <div id="app">
-    <div class="lds-default" v-if="loadingState == true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div class="lds-default" v-if="loadingState == true">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
     <button v-else v-on:click="loadUser">User anfordern</button>
-    
-    <hr>
+
+    <hr />
     {{ items }}
-    
-    
   </div>
 </template>
 
 <script>
-
-
 export default {
   name: 'App',
-  components: {
-    
-  },
-  data:() => ({
+  components: {},
+  data: () => ({
     loadingState: false,
     items: []
   }),
   methods: {
-    async loadUser() {
-      this.loadingState = true;
-      console.log("button geht");
-      let apiUrl = 'https://randomuser.me/api/'
+    async loadUser () {
+      this.loadingState = true
+      console.log('button geht')
+      let apiUrl = 'https://randomuser.me/api/?nat=de'
       // let apiUrl = 'https://fakeapi.andreaspabst.com/api/todos'
       try {
-        let response = await this.axios.get(apiUrl);
-        this.items = response.data;
-        console.log(response);
+        let response = await this.axios.get(apiUrl)
+        this.items = response.data
+        console.log(response)
       } catch (e) {
-        console.log(e);
+        console.log(e)
       }
-      this.loadingState = false;
-      
+      this.loadingState = false
     }
   }
 }
@@ -118,13 +124,14 @@ export default {
   left: 62px;
 }
 @keyframes lds-default {
-  0%, 20%, 80%, 100% {
+  0%,
+  20%,
+  80%,
+  100% {
     transform: scale(1);
   }
   50% {
     transform: scale(1.5);
   }
 }
-
-
 </style>
