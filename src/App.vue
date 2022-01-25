@@ -17,33 +17,57 @@
     <button v-else v-on:click="loadUser">User anfordern</button>
 
     <hr />
-    {{ items }}
+    <ProfileCard
+      v-bind:userFirstName="userFirstName"
+      v-bind:userLastName="userLastName"
+      v-bind:userAge="userAge"
+      v-bind:userCity="userCity"
+      v-bind:userCountry="userCountry"
+      v-bind:userPicture="userPicture"
+    ></ProfileCard>
   </div>
 </template>
 
 <script>
+import ProfileCard from './components/ProfileCard.vue'
+
 export default {
   name: 'App',
-  components: {},
+  components: { ProfileCard },
   data: () => ({
     loadingState: false,
-    items: []
+    items: [],
+    userFirstName: '',
+    userLastName: '',
+    userAge: '',
+    userCity: '',
+    userCountry: '',
+    userPicture: ''
   }),
   methods: {
     async loadUser () {
       this.loadingState = true
-      console.log('button geht')
-      let apiUrl = 'https://randomuser.me/api/?nat=de'
-      // let apiUrl = 'https://fakeapi.andreaspabst.com/api/todos'
+      //console.log('button geht')
+      let apiUrl = 'https://randomuser.me/api/'
+
       try {
         let response = await this.axios.get(apiUrl)
-        this.items = response.data
-        console.log(response)
+        this.items = response
+        this.userFirstName = response.data.results[0].name.first
+        this.userLastName = response.data.results[0].name.last
+        this.userAge = response.data.results[0].dob.age
+        this.userCity = response.data.results[0].location.city
+        this.userCountry = response.data.results[0].location.country
+        this.userPicture = response.data.results[0].picture.large
+        //console.log(response)
       } catch (e) {
         console.log(e)
       }
       this.loadingState = false
     }
+  },
+  created () {
+    this.loadUser()
   }
 }
 </script>
