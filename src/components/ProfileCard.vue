@@ -40,7 +40,7 @@ export default {
 .profileCard {
   max-width: 375px;
   width: 90%;
-  margin: auto;
+  margin: 2rem auto;
   background-color: whitesmoke;
   border-radius: 20px 20px 20px 20px;
 }
