@@ -11,19 +11,42 @@
     ></ProfileCard>
 
     <GenerateUserButton v-bind:loadingState="loadingState"></GenerateUserButton>
+
+    <SaveUserButton
+      v-bind:userFirstName="userFirstName"
+      v-bind:userLastName="userLastName"
+      v-bind:userAge="userAge"
+      v-bind:userCity="userCity"
+      v-bind:userCountry="userCountry"
+      v-bind:userPicture="userPicture"
+      v-bind:userMailAdress="userMailAdress"
+      v-bind:savedUser="savedUser"
+      @saveUser="saveUser"
+    ></SaveUserButton>
+
+    <SavedUserList
+      v-bind:savedUser="savedUser"
+      @deleteUser="deleteUser"
+    ></SavedUserList>
   </div>
 </template>
 
 <script>
 import ProfileCard from './components/ProfileCard.vue';
 import GenerateUserButton from './components/GenerateUserButton.vue';
+import SaveUserButton from './components/SaveUserButton.vue';
+import SavedUserList from './components/SavedUserList.vue';
 
 export default {
   name: 'App',
-  components: { ProfileCard, GenerateUserButton },
+  components: {
+    ProfileCard,
+    GenerateUserButton,
+    SaveUserButton,
+    SavedUserList,
+  },
   data: () => ({
     loadingState: false,
-    items: [],
     userFirstName: '',
     userLastName: '',
     userAge: '',
@@ -31,11 +54,12 @@ export default {
     userCountry: '',
     userPicture: '',
     userMailAdress: '',
+    savedUser: [],
   }),
   methods: {
     async loadUser () {
       this.loadingState = true;
-      //console.log('button geht')
+
       let apiUrl = 'https://randomuser.me/api/';
 
       try {
@@ -48,11 +72,16 @@ export default {
         this.userCountry = response.data.results[0].location.country;
         this.userPicture = response.data.results[0].picture.large;
         this.userMailAdress = response.data.results[0].email;
-        //console.log(response)
       } catch (e) {
         console.log(e);
       }
       this.loadingState = false;
+    },
+    saveUser (newUserObject) {
+      this.savedUser = [...this.savedUser, newUserObject];
+    },
+    deleteUser (userID) {
+      this.savedUser = this.savedUser.filter(user => user.id !== userID);
     },
   },
   created () {

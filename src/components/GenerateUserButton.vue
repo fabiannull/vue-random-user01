@@ -14,7 +14,9 @@
       <div></div>
       <div></div>
     </div>
-    <button v-else v-on:click="callLoadingUser">User anfordern</button>
+    <button v-else v-on:click="callLoadingUser">
+      <font-awesome-icon icon="sync" />
+    </button>
   </div>
 </template>
 
