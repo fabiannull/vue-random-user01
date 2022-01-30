@@ -15,7 +15,7 @@
       <div></div>
     </div>
     <button v-else v-on:click="callLoadingUser">
-      <font-awesome-icon icon="sync" />
+      <font-awesome-icon class="icon" icon="sync" />
     </button>
   </div>
 </template>
@@ -36,6 +36,16 @@ export default {
 </script>
 
 <style scope>
+button {
+  width: 80px;
+  height: 80px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 200%;
+  color: rgb(84, 88, 102);
+  cursor: pointer;
+}
+
 .lds-default {
   display: inline-block;
   position: relative;

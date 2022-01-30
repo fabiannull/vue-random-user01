@@ -1,9 +1,8 @@
 <template>
   <div>
-    <button v-on:click="saveUser">
+    <button :disabled="isActive" v-on:click="saveUser">
       <font-awesome-icon class="icon" icon="plus" />
     </button>
-    {{ userIDList }}
   </div>
 </template>
 
@@ -14,14 +13,11 @@ export default {
   name: 'SaveUserButton',
   components: {},
   data: () => ({
+    isActive: true,
     userIDList: [],
   }),
   methods: {
     saveUser () {
-      for (var userData of this.savedUser) {
-        console.log(userData.id);
-      }
-
       const newUserObject = {
         id: uuidv4(),
         userFirstName: this.userFirstName,

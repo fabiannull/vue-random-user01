@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="userList">
     <ul>
       <li v-for="user in savedUser" v-bind:key="user.id">
         <SavedUser
@@ -25,4 +25,21 @@ export default {
 };
 </script>
 
-<style scope></style>
+<style scope>
+.userList {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+ul {
+  list-style: none;
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+ul > li {
+  display: inline-block;
+}
+</style>

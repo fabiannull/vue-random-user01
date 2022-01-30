@@ -9,21 +9,23 @@
       v-bind:userPicture="userPicture"
       v-bind:userMailAdress="userMailAdress"
     ></ProfileCard>
+    <div class="buttonSection">
+      <GenerateUserButton
+        v-bind:loadingState="loadingState"
+      ></GenerateUserButton>
 
-    <GenerateUserButton v-bind:loadingState="loadingState"></GenerateUserButton>
-
-    <SaveUserButton
-      v-bind:userFirstName="userFirstName"
-      v-bind:userLastName="userLastName"
-      v-bind:userAge="userAge"
-      v-bind:userCity="userCity"
-      v-bind:userCountry="userCountry"
-      v-bind:userPicture="userPicture"
-      v-bind:userMailAdress="userMailAdress"
-      v-bind:savedUser="savedUser"
-      @saveUser="saveUser"
-    ></SaveUserButton>
-
+      <SaveUserButton
+        v-bind:userFirstName="userFirstName"
+        v-bind:userLastName="userLastName"
+        v-bind:userAge="userAge"
+        v-bind:userCity="userCity"
+        v-bind:userCountry="userCountry"
+        v-bind:userPicture="userPicture"
+        v-bind:userMailAdress="userMailAdress"
+        v-bind:savedUser="savedUser"
+        @saveUser="saveUser"
+      ></SaveUserButton>
+    </div>
     <SavedUserList
       v-bind:savedUser="savedUser"
       @deleteUser="deleteUser"
@@ -101,6 +103,12 @@ export default {
 }
 
 body {
-  background-color: rgb(24, 161, 175);
+  background-color: rgb(60, 199, 209);
+}
+
+.buttonSection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 </style>
