@@ -23,13 +23,26 @@
         v-bind:userPicture="userPicture"
         v-bind:userMailAdress="userMailAdress"
         v-bind:savedUser="savedUser"
+        v-bind:userButtonIsActive="userButtonIsActive"
         @saveUser="saveUser"
       ></SaveUserButton>
     </div>
     <SavedUserList
       v-bind:savedUser="savedUser"
+      @selectedUser="selectedUser"
       @deleteUser="deleteUser"
     ></SavedUserList>
+
+    <ProfileCard
+      v-if="Object.keys(userToShow).length !== 0"
+      v-bind:userFirstName="userToShow.userFirstName"
+      v-bind:userLastName="userToShow.userLastName"
+      v-bind:userAge="userToShow.userAge"
+      v-bind:userCity="userToShow.userCity"
+      v-bind:userCountry="userToShow.userCountry"
+      v-bind:userPicture="userToShow.userPicture"
+      v-bind:userMailAdress="userToShow.userMailAdress"
+    ></ProfileCard>
   </div>
 </template>
 
@@ -57,6 +70,9 @@ export default {
     userPicture: '',
     userMailAdress: '',
     savedUser: [],
+    userButtonIsActive: true,
+    selectedUserIdDefault: '',
+    userToShow: {},
   }),
   methods: {
     async loadUser () {
@@ -78,12 +94,29 @@ export default {
         console.log(e);
       }
       this.loadingState = false;
+      this.userButtonIsActive = false;
     },
     saveUser (newUserObject) {
       this.savedUser = [...this.savedUser, newUserObject];
+      this.userButtonIsActive = true;
     },
     deleteUser (userID) {
       this.savedUser = this.savedUser.filter(user => user.id !== userID);
+      this.userButtonIsActive = false;
+    },
+    selectedUser (selectedUserId) {
+      this.selectedUserIdDefault = selectedUserId;
+      this.findSelectedUser();
+    },
+    findSelectedUser () {
+      for (var userSaved of this.savedUser) {
+        // console.log(userSaved);
+        if (this.selectedUserIdDefault === userSaved.id) {
+          //console.log('selectedUserIdDefault:', this.selectedUserIdDefault);
+          //console.log('userSaved.id:', userSaved.id);
+          this.userToShow = userSaved;
+        }
+      }
     },
   },
   created () {

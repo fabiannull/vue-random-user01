@@ -4,6 +4,9 @@
       <li v-for="user in savedUser" v-bind:key="user.id">
         <SavedUser
           v-bind:user="user"
+          v-bind:userID="user.id"
+          v-bind:savedUser="savedUser"
+          @selectedUser="$emit('selectedUser', user.id)"
           @deleteUser="$emit('deleteUser', user.id)"
         ></SavedUser>
       </li>

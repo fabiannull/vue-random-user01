@@ -1,6 +1,10 @@
 <template>
   <div class="savedUser">
-    <img v-bind:src="user.userPicture" alt="" />
+    <img
+      v-bind:src="user.userPicture"
+      alt=""
+      @click="$emit('selectedUser', user.id)"
+    />
 
     <font-awesome-icon
       class="icon"
@@ -18,7 +22,7 @@ export default {
   methods: {},
   computed: {},
 
-  props: ['user'],
+  props: ['user', 'userID', 'savedUser'],
 };
 </script>
 

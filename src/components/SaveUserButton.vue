@@ -1,7 +1,11 @@
 <template>
   <div>
-    <button :disabled="isActive" v-on:click="saveUser">
-      <font-awesome-icon class="icon" icon="plus" />
+    <button :disabled="userButtonIsActive" v-on:click="saveUser">
+      <font-awesome-icon
+        v-bind:class="{ activeButton: userButtonIsActive }"
+        class="icon"
+        icon="plus"
+      />
     </button>
   </div>
 </template>
@@ -13,7 +17,6 @@ export default {
   name: 'SaveUserButton',
   components: {},
   data: () => ({
-    isActive: true,
     userIDList: [],
   }),
   methods: {
@@ -43,8 +46,13 @@ export default {
     'userPicture',
     'userMailAdress',
     'savedUser',
+    'userButtonIsActive',
   ],
 };
 </script>
 
-<style scope></style>
+<style scope>
+.icon.activeButton {
+  color: rgba(84, 88, 102, 0.397);
+}
+</style>
